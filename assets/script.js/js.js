@@ -8,18 +8,21 @@
 
 function hourTracker() {
 
+    // displays the current time and date with moment.js
     $("#currentDay").text(moment().format("MMMM Do YYYY, h:mm:ss a"));
 
+    // saveBtn click listener to save the text input.
     $(".saveBtn").on("click", function () {
+        var text = $(this).siblings(".description").val(); // taken the change from the sibling html description attribute
+        var time = $(this).parent().attr("id"); // taken the change from the parent html id attribute
 
-        var userText = $(this).siblings(".description").val();
-        var time = $(this).parent().attr("id");
-
-        localStorage.setItem(userText, time);
+        // save inputs in localStorage.
+        localStorage.setItem(time, text);
     })
-
+    // get current number of hours.
     var currentHour = moment().hour();
 
+    // loop over time blocks, checks for past, present and future with help from css
     $(".time-block").each(function () {
         var blockHour = parseInt($(this).attr("id").split("hour")[1]);
 
@@ -40,7 +43,6 @@ function hourTracker() {
         }
     })
 
-
     $("#hour9 .description").val(localStorage.getItem("hour9"));
     $("#hour10 .description").val(localStorage.getItem("hour10"));
     $("#hour11 .description").val(localStorage.getItem("hour11"));
@@ -52,4 +54,5 @@ function hourTracker() {
     $("#hour17 .description").val(localStorage.getItem("hour17"));
 
 }
+// starts funtion over again.
 hourTracker();
