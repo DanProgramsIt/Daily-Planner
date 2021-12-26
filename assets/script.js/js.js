@@ -6,17 +6,40 @@
 // create a loop.
 // create a diffrent tracker for past, present, and future. 
 
-$(document).ready(function() {
+function hourTracker() {
 
     $("#currentDay").text(moment().format("MMMM Do YYYY, h:mm:ss a"));
 
-    $(".saveBtn").on("click", function() {
-        var userText = $(this).siblings(".description").val(); 
+    $(".saveBtn").on("click", function () {
+
+        var userText = $(this).siblings(".description").val();
         var time = $(this).parent().attr("id");
-        console.log(this);
 
         localStorage.setItem(userText, time);
     })
+
+    var currentHour = moment().hour();
+
+    $(".time-block").each(function () {
+        var blockHour = parseInt($(this).attr("id").split("hour")[1]);
+
+        if (blockHour < currentHour) {
+            $(this).addClass("past");
+            $(this).removeClass("future");
+            $(this).removeClass("present");
+        }
+        else if (blockHour === currentHour) {
+            $(this).removeClass("past");
+            $(this).addClass("present");
+            $(this).removeClass("future");
+        }
+        else {
+            $(this).removeClass("present");
+            $(this).removeClass("past");
+            $(this).addClass("future");
+        }
+    })
+
 
     $("#hour9 .description").val(localStorage.getItem("hour9"));
     $("#hour10 .description").val(localStorage.getItem("hour10"));
@@ -27,5 +50,6 @@ $(document).ready(function() {
     $("#hour15 .description").val(localStorage.getItem("hour15"));
     $("#hour16 .description").val(localStorage.getItem("hour16"));
     $("#hour17 .description").val(localStorage.getItem("hour17"));
-    console.log(localStorage);
-})
+
+}
+hourTracker();
