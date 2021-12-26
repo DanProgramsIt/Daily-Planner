@@ -5,7 +5,7 @@ Hello and welcome to the Daily Planner, this planner allows a user to save event
 
 ## How It Works.
 * When the planner is opened, the current day is displayed at the top of the calendar.
-* Below that you will see a **Clear Planner** button that clears everything on refresh.
+* Below that you will see a **Clear Planner** button that clears everything in localStorage on refresh.
 * When you scroll down you'll see time blocks for standard business hours from 9a.m to 5p.m
 * Each time block is color-coded to the time of the day, past, present, or future.
 
